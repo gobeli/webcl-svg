@@ -2,13 +2,11 @@
 	svg {
 		width:  100px;
 		height: 80px;
-		top:  100px;
-		position: absolute;
 	}
 </style>
 
 <script>
-  let closed = false, rectEl;
+  let rectEl;
   let eyeOffset = {
     x: 0,
     y: 0
@@ -43,11 +41,11 @@
     eyeOffset = { x: xe, y: ye };
   }
 
-  export let left;
+  export let left, closed;
 </script>
 <svelte:window on:mousemove={onMouseMove}/>
 
-<svg viewBox="0 0 120 120" style="left: {left}" on:click={() => closed = !closed}>
+<svg viewBox="0 0 120 120" on:click={() => closed = !closed}>
   <filter id="shadow">
     <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
     <feOffset       dx="0" dy="8" />
