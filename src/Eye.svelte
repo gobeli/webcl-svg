@@ -12,10 +12,14 @@
     y: 0
   }
 
-  // setInterval(() => {
-  //   closed = true;
-  //   setTimeout(() => closed = false, 400);
-  // }, 2400)
+  setInterval(() => {
+    // only blink if eyes are not already closed
+    if (closed) {
+      return
+    }
+    closed = true;
+    setTimeout(() => closed = false, 200);
+  }, 3200)
 
   const onMouseMove = evt => {
     const rect = rectEl.getBoundingClientRect();
@@ -41,7 +45,7 @@
     eyeOffset = { x: xe, y: ye };
   }
 
-  export let left, closed;
+  export let closed;
 </script>
 <svelte:window on:mousemove={onMouseMove}/>
 

@@ -32,8 +32,8 @@
 <div class="container">
 	<h1>Login</h1>
 	<div class="eyes">
-		<Eye left="100px" closed={closed}  />
-		<Eye left="50px" closed={closed} />
+		<Eye closed={closed} />
+		<Eye closed={closed} />
 	</div>
 	<div class="form">
 		<div class="control">
