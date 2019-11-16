@@ -8,6 +8,7 @@
 	.container {
 		max-width: 700px;
 		margin: auto;
+		color: #eee;
 	}
 	h1 {
 		text-align: center;

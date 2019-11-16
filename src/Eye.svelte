@@ -1,7 +1,8 @@
 <style>
 	svg {
-		width:  100px;
-		height: 80px;
+    height: 80px;
+    background-color: #eee;
+    border-radius: 50%;
 	}
 </style>
 

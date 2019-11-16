@@ -1,10 +1,7 @@
-import App from './App.svelte';
+import Slides from './Slides.svelte';
 
-const app = new App({
+const app = new Slides({
 	target: document.body,
-	props: {
-		name: 'world'
-	}
 });
 
 export default app;
