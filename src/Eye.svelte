@@ -12,15 +12,19 @@
     x: 0,
     y: 0
   }
-
-  setInterval(() => {
-    // only blink if eyes are not already closed
-    if (closed) {
-      return
-    }
-    closed = true;
-    setTimeout(() => closed = false, 200);
-  }, 3200)
+  const animation = [
+    [
+      40, 1
+    ],
+    [
+      0, 0
+    ],
+    [
+      30, 0
+    ]
+  ];
+  let animationStep = 0
+  let animationDirection = 1;
 
   const onMouseMove = evt => {
     const rect = rectEl.getBoundingClientRect();
@@ -45,6 +49,32 @@
     }
     eyeOffset = { x: xe, y: ye };
   }
+
+  const animate = closed => {
+    animationStep += animationDirection;
+    if (animationStep === 2 && animationDirection === 1) {
+      animationDirection = -1;
+      return;
+    }
+    if (animationStep === 0 && animationDirection === -1) {
+      animationDirection = 1;
+      return;
+    }
+    setTimeout(() => {
+      animate(closed);
+    }, 50);
+  }
+
+  $: animate(closed);
+
+  setInterval(() => {
+    // only blink if eyes are not already closed
+    if (closed) {
+      return;
+    }
+    closed = true;
+    setTimeout(() => closed = false, 200);
+  }, 3200)
 
   export let closed;
 </script>
@@ -72,7 +102,7 @@
     <ellipse cx="50" cy="50" rx="7" ry="7" opacity="1" fill="#FFFFFF" fill-opacity="0.8"/>
   </g>
   <g class="lids">
-    <path d="M0 60 A60,60 0 0,1 120,60 A60,{closed ? 40 : 30} 0 0,{closed ? 1 : 0} 0,60 Z" fill="#FDDC99" fill-opacity="1" filter="url(#shadow)" />
+    <path d="M0 60 A60,60 0 0,1 120,60 A60,{animation[animationStep][0]} 0 0,{animation[animationStep][1]} 0,60 Z" fill="#FDDC99" fill-opacity="1" filter="url(#shadow)" />
     <path d="M0 60 A60,60 0 0,0 120,60 A60,40 0 0,1 0,60 Z" fill="#F4CB76" fill-opacity="1" />
   </g>
 </svg>
